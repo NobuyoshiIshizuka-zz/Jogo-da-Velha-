@@ -6,7 +6,7 @@ public class Player {
 	Board boad;
 	char symbol;
 
-	Move inputMove() {
+	public Move inputMove() {
 
 		return null;
 	}
