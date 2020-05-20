@@ -1,6 +1,7 @@
 package br.nobuwebdeveloper.tictactoe.core;
 
 import br.nobuwebdeveloper.tictactoe.Constants;
+import br.nobuwebdeveloper.tictactoe.UI;
 
 public class Game {
 
@@ -9,5 +10,8 @@ public class Game {
 	
 	public void play() {
 		
+		UI.printGameTitle();
+		
+		UI.readInput("Nome do Jogador:");
 	}
 }
