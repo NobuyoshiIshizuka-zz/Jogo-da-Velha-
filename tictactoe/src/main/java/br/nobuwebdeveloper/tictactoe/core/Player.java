@@ -17,15 +17,15 @@ public class Player {
 		this.symbol = symbol;
 	}
 
-	private Move inputMove() {
+	private Move inputMove() throws InvalidMoveException {
 		String moveStr = UI.readInput("Jogador '" + name + "' =>");
 		return new Move(moveStr);
 
 	}
 
-	public void play() {
+	public boolean play() throws InvalidMoveException {
 		Move move = inputMove();
-		boad.play(this, move);
+		return boad.play(this, move);
 	}
 
 	public String getName() {
