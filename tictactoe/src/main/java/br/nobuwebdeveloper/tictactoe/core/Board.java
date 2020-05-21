@@ -5,8 +5,8 @@ import br.nobuwebdeveloper.tictactoe.UI;
 
 public class Board {
 
-	char[][] matrix = new char[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
-	
+	private char[][] matrix = new char[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
+
 	public Board() {
 		clear();
 	}
@@ -50,13 +50,79 @@ public class Board {
 	}
 
 	public boolean play(Player player, Move move) {
-		
-		int i = move.i;
-		int j = move.j;
-		
-		matrix[i][j] = player.symbol;
-		
-		//TODO checar se o jogador ganhou
+
+		int i = move.getI();
+		int j = move.getJ();
+
+		// TODO Validar os movimentos
+		matrix[i][j] = player.getSymbol();
+
+		// TODO checar se o jogador ganhou
 		return false;
+	}
+
+	private boolean checkRows(Player player) {
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			if (checkRow(i, player)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean checkRow(int i, Player player) {
+		char symbol = player.getSymbol();
+
+		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
+			if (matrix[i][j] != symbol) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean checkCols(Player player) {
+		char symbol = player.getSymbol();
+
+		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
+			if (checkCol(j, player)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean checkCol(int j, Player player) {
+		char symbol = player.getSymbol();
+
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			if (matrix[i][j] != symbol) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean chackDiagonal1(Player player) {
+		char symbol = player.getSymbol();
+		
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			if (matrix[i][i] != symbol) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private boolean checkDiagonal2(Player player) {
+		char symbol = player.getSymbol();
+		int lastLine = Constants.BOARD_SIZE -1;
+		
+		for (int i = lastLine, j = 0; i >= 0; i--, j++) {
+			if (matrix[i][j] != symbol) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
