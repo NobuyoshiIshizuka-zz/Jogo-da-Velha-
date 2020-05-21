@@ -56,9 +56,9 @@ public class Board {
 
 		// TODO Validar os movimentos
 		matrix[i][j] = player.getSymbol();
-
+		
 		// TODO checar se o jogador ganhou
-		return false;
+		return checkRows(player) || checkCols(player) || checkDiagonal1(player) || checkDiagonal2(player);
 	}
 
 	private boolean checkRows(Player player) {
@@ -103,7 +103,7 @@ public class Board {
 		return true;
 	}
 	
-	private boolean chackDiagonal1(Player player) {
+	private boolean checkDiagonal1(Player player) {
 		char symbol = player.getSymbol();
 		
 		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
