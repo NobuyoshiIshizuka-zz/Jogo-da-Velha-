@@ -1,20 +1,28 @@
 package br.nobuwebdeveloper.tictactoe.core;
 
+import java.io.IOException;
+
 import br.nobuwebdeveloper.tictactoe.Constants;
 import br.nobuwebdeveloper.tictactoe.UI;
+import br.nobuwebdeveloper.tictactoe.score.FileScoreManager;
+import br.nobuwebdeveloper.tictactoe.score.ScoreManager;
 
 public class Game {
 
 	private Board board = new Board();
 	private Player[] players = new Player[Constants.SYMBOL_PLAYERS.length];
 	private int currentPlayerIndex = -1;
+	private ScoreManager scoreManager;
 
-	public void play() {
+	public void play() throws IOException {
+		scoreManager = createScoreManager();
+		
 		UI.printGameTitle();
 
 		for (int i = 0; i < players.length; i++) {
 			players[i] = createPlayer(i);
 		}
+		
 
 		boolean gameEnded = false;
 		Player currentPlayer = nextPlayer();
@@ -45,6 +53,8 @@ public class Game {
 			UI.printText("  O jogo terminou empatado ");
 		} else {
 			UI.printText("  O jogador '" + winner.getName() + "' venceu o jogo ");
+			
+			scoreManager.saveScore(winner);
 		}
 		
 		board.print();
@@ -55,6 +65,12 @@ public class Game {
 		String name = UI.readInput(" Jogador " + (index + 1) + " => ");
 		char symbol = Constants.SYMBOL_PLAYERS[index];
 		Player player = new Player(name, board, symbol);
+		
+		Integer score = scoreManager.getScore(player);
+		
+		if (score != null) {
+			UI.printText("  O jogador '" + player.getName() + "' já possui " + score + " vitória(s)! ");
+		}
 
 		UI.printText("  O jogador '" + name + "' vai usar o simbolo " + symbol + "'");
 
@@ -73,5 +89,9 @@ public class Game {
 		
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
 		return players[currentPlayerIndex];
+	}
+	
+	private ScoreManager createScoreManager() throws IOException {
+		return new FileScoreManager();
 	}
 }
