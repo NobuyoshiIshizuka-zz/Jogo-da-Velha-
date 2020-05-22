@@ -28,7 +28,7 @@ Para inserir jogadas neste game é muito simples, basta o usuário digitar o nú
 
  O jogador que preencher as lacunas vertical, horizontal ou na diagonal primeiro, vencerá o jogo e o sistema mostrará na tela uma mensagem, informando que o jagodor cadastrado venceu o jogo. Nesta imagem podemos observar que o jogador Player 1 venceu o jogo.
 
-<img align="center" src="img/tictactoe-img3" width="900">
+<img align="center" src="img/tictactoe-img3.png" width="900">
 
 
 ## Imagem 4: Jogo Empatado ##
